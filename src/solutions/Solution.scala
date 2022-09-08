@@ -100,4 +100,14 @@ object Solution {
     }
   }
 
+  def trap(height: Array[Int]): Int = {
+    @tailrec
+    def trapHelper(height: Array[Int], acc: Int = 0): Int = {
+      val zeroCount = height.dropWhile(_ == 0).reverse.dropWhile(_ == 0).count(_ == 0)
+      if (zeroCount == 0) acc
+      else trapHelper(height.map{num => if (num != 0) num - 1 else num }, acc + zeroCount)
+    }
+    trapHelper(height)
+  }
+
 }

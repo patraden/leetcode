@@ -1,16 +1,26 @@
 import solutions.TreeNodeModified
-import solutions.Solution.{fib, uniquePaths, maxPathSum, twoSum}
+import solutions.Solution.{fib, uniquePaths, maxPathSum, twoSum, trap}
 
 object Main extends App {
   val nullInt = null.asInstanceOf[Int]
+
+  val a = Array(0,1,0,2,1,0,1,3,2,1,2,1,0,0)
+  println(a.mkString("Array(", ", ", ")"))
+  println(trap(a))
+
+  val b = Array(4,2,0,3,2,5)
+  println(b.mkString("Array(", ", ", ")"))
+  println(trap(b))
+
+
   import solutions.MergeSort.binarySearch
 
-  val sumOfTwo1 = twoSum(Array(2,7,11,15), 9)
-  println(sumOfTwo1.mkString("Array(", ", ", ")"))
-  val sumOfTwo2 = twoSum(Array(3,2,4), 6)
-  println(sumOfTwo2.mkString("Array(", ", ", ")"))
-  val sumOfTwo3 = twoSum(Array(3,3), 6)
-  println(sumOfTwo3.mkString("Array(", ", ", ")"))
+//  val sumOfTwo1 = twoSum(Array(2,7,11,15), 9)
+//  println(sumOfTwo1.mkString("Array(", ", ", ")"))
+//  val sumOfTwo2 = twoSum(Array(3,2,4), 6)
+//  println(sumOfTwo2.mkString("Array(", ", ", ")"))
+//  val sumOfTwo3 = twoSum(Array(3,3), 6)
+//  println(sumOfTwo3.mkString("Array(", ", ", ")"))
 
   import solutions.MergeSort.{sortRec, binarySearch}
 //  val a = Array((3,0),(3,1))
