@@ -11,7 +11,7 @@ def matrix_binary_search(
 ) -> bool:
     """
     binary search invariant is [top, bottom)
-    :param mat: matrix
+    :param mat: sorted matrix
     :param target: searched number
     :param top: top left matrix cell
     :param bot: bottom right matrix cell + 1
