@@ -4,7 +4,7 @@ from collections import deque
 
 
 def main():
-    with open("input.txt", "r") as f:
+    with open("input1.txt", "r") as f:
         k = int(f.readline().rstrip())
         nums = list(map(int, f.readline().rstrip().split()))
         n = len(nums)

@@ -1,40 +1,92 @@
-def binary_search_in_sorted_matrix(
+#  https://leetcode.com/problems/search-a-2d-matrix/
+
+import functools
+
+
+@functools.total_ordering
+class Cell:
+    def __init__(self, row: int = 1, col: int = 1):
+        self.row = row
+        self.col = col
+
+    def __add__(self, other):
+        return Cell(self.row + other.row, self.col + other.col)
+
+    def __floordiv__(self, other):
+        return Cell(self.row // other.row, self.col // other.col)
+
+    def __lt__(self, other):
+        return (self.row < other.row and self.col <= other.col) or \
+            (self.row <= other.row and self.col < other.col)
+
+    def __eq__(self, other):
+        return self.row == other.row and self.col == other.col
+
+    def __str__(self):
+        return f"({self.row}, {self.col})"
+
+
+def matrix_binary_search(
         mat: list[list[int]],
         target: int,
-        col_l: int,
-        col_r: int,
-        row_u: int,
-        row_d: int
+        top: Cell,
+        bot: Cell
 ) -> bool:
-    if col_l == col_r or row_u == row_d:
-        def _list(i): return mat[i][col_l] if col_l == col_r else mat[row_u][i]
-        l, r = (row_u, row_d + 1) if col_l == col_r else (col_l, col_r + 1)
+    """
+    binary search invariant is [top, bottom)
+    :param mat: matrix
+    :param target: searched number
+    :param top: top left matrix cell
+    :param bot: bottom right matrix cell + 1
+    :return:
+    """
+    n, m = len(mat), len(mat[0]) if len(mat) > 0 else 0
+    if top.row >= bot.row or top.col >= bot.col or top.row >= n or top.col >= m or bot.row <= 0 or bot.col <= 0:
+        return False
+    elif (top.row + 1 == bot.row) and (top.col + 1 == bot.col):
+        return mat[top.row][top.col] == target
+    if (top.row + 1 == bot.row) or (top.col + 1 == bot.col):
+        one = Cell(0, 1) if top.row + 1 == bot.row else Cell(1, 0)
+        two = Cell(2, 2)
+        l = top
+        r = Cell(top.row, bot.col) if top.row + 1 == bot.row else Cell(bot.row, top.col)
         while l < r:
-            m = (l + r) // 2
-            if _list(m) == target:
+            mid = (l + r) // two
+            if mat[mid.row][mid.col] == target:
                 return True
-            elif target < _list(m):
-                r = m
+            elif target < mat[mid.row][mid.col]:
+                r = mid
             else:
-                l = m + 1
+                l = mid + one
         return False
     else:
-        n, m = row_d - row_u, col_r - col_l
-        n, m = (m, n) if m < n else (n, m)
+        sqr_size = min(bot.row - top.row, bot.col - top.col)
+        sqr = Cell(sqr_size, sqr_size)
+        one = Cell(1, 1)
+        two = Cell(2, 2)
+        l = top
+        r = top + sqr
+        while l < r:
+            m = (l + r) // two
+            if mat[m.row][m.col] == target:
+                return True
+            elif target < mat[m.row][m.col]:
+                r = m
+            else:
+                l = m + one
+        return matrix_binary_search(mat, target, Cell(top.row, r.col), Cell(r.row, bot.col)) or\
+            matrix_binary_search(mat, target, Cell(r.row, top.col), Cell(bot.row, r.col))
 
 
-def tests():
-    m1 = [[1], [2], [5], [5], [10], [55]]
-    m2 = [[1, 2, 5, 5, 10, 55]]
+def main():
+    with open('input1.txt', mode='r') as f:
+        target = int(f.readline().rstrip())
+        n = int(f.readline().rstrip())
+        m = int(f.readline().rstrip())
+        mat = [[int(num) for num in f.readline().rstrip().split()] for _ in range(n)]
 
-    assert not binary_search_in_sorted_matrix(m1, 0, col_l=0, col_r=0, row_u=0, row_d=len(m1))
-    assert binary_search_in_sorted_matrix(m1, 2, col_l=0, col_r=0, row_u=0, row_d=len(m1))
-    assert binary_search_in_sorted_matrix(m1, 55, col_l=0, col_r=0, row_u=0, row_d=len(m1))
-
-    assert not binary_search_in_sorted_matrix(m2, 0, col_l=0, col_r=len(m2[0]), row_u=0, row_d=0)
-    assert binary_search_in_sorted_matrix(m2, 2, col_l=0, col_r=len(m2[0]), row_u=0, row_d=0)
-    assert binary_search_in_sorted_matrix(m2, 55, col_l=0, col_r=len(m2[0]), row_u=0, row_d=0)
+    print(matrix_binary_search(mat, target, Cell(0, 0), Cell(n, m)))
 
 
 if __name__ == "__main__":
-    tests()
+    main()
