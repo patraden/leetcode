@@ -7,10 +7,6 @@ class ListNode:
         self.val = val
         self.next = next
 
-
-
-
-
 def mergeKLists(lists: List[Optional[ListNode]]) -> Optional[ListNode]:
     from queue import PriorityQueue
     n = len(lists)
