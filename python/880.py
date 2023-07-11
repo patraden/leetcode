@@ -40,9 +40,9 @@ class Solution:
 
 def main():
     print(Solution().decodeAtIndex(s="leet2code3", k=13))
-    # print(Solution().decodeAtIndex(s="ha22", k=5))
-    # print(Solution().decodeAtIndex(s="a2345678999999999999999", k=3))
-    # print(Solution().decodeAtIndex(s="abc", k=1))
+    print(Solution().decodeAtIndex(s="ha22", k=5))
+    print(Solution().decodeAtIndex(s="a2345678999999999999999", k=3))
+    print(Solution().decodeAtIndex(s="abc", k=1))
 
 
 if __name__ == "__main__":
