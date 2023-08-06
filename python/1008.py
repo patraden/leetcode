@@ -14,9 +14,8 @@ class Solution:
         def helper(start: int, end: int) -> Optional[TreeNode]:
             if start < n and start < end:
                 node = TreeNode(preorder[start])
-                r = right[start]
-                node.left = helper(start + 1, r)
-                node.right = helper(r, end)
+                node.left = helper(start + 1, right[start])
+                node.right = helper(right[start], end)
                 return node
 
         n = len(preorder)
