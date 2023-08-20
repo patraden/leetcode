@@ -50,13 +50,9 @@ class Solution:
 
 
 def main():
-    # print(Solution().maximumScore([1, 7, 11, 1, 5], k=14))  # expected 823751938
-    # print(Solution().maximumScore([8, 3, 9, 3, 8], k=2))
-    # print(Solution().maximumScore([19, 12, 14, 6, 10, 18], k=3))
-
-    num = 1_000_000_007 - 823751938
-    print(num)
-    print(num / 11)
+    print(Solution().maximumScore([1, 7, 11, 1, 5], k=14))  # expected 823751938 561 / 869 test cases passed.
+    print(Solution().maximumScore([8, 3, 9, 3, 8], k=2))
+    print(Solution().maximumScore([19, 12, 14, 6, 10, 18], k=3))
 
 
 if __name__ == "__main__":
