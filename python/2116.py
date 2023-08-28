@@ -1,6 +1,3 @@
-from functools import cache
-
-
 class Solution:
     def canBeValid(self, s: str, locked: str) -> bool:
         n = len(s)
@@ -26,16 +23,16 @@ class Solution:
 
 
 def main():
-    # print(Solution().canBeValid(s="))()))", locked="010100"))
-    # print(Solution().canBeValid(s="()()", locked="0000"))
-    # print(Solution().canBeValid(s="())", locked="000"))
-    # print(Solution().canBeValid(s="()", locked="00"))
+    print(Solution().canBeValid(s="))()))", locked="010100"))
+    print(Solution().canBeValid(s="()()", locked="0000"))
+    print(Solution().canBeValid(s="())", locked="000"))
+    print(Solution().canBeValid(s="()", locked="00"))
     print(Solution().canBeValid(s=")(", locked="00"))
-    # print(Solution().canBeValid(s="(()())((((", locked="1111111100"))
-    # print(Solution().canBeValid(
-    #     s="())()))()(()(((())(()()))))((((()())(())",
-    #     locked="1011101100010001001011000000110010100101")
-    # )
+    print(Solution().canBeValid(s="(()())((((", locked="1111111100"))
+    print(Solution().canBeValid(
+        s="())()))()(()(((())(()()))))((((()())(())",
+        locked="1011101100010001001011000000110010100101")
+    )
 
 
 if __name__ == "__main__":
