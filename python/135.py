@@ -14,9 +14,8 @@ class Solution:
 
         # give candies from right to left
         for i in range(n - 1, -1, -1):
-            if i < n - 1 and ratings[i] > ratings[i + 1]:
-                if candies[i + 1] + 1 > candies[i]:
-                    candies[i] = candies[i + 1] + 1
+            if i < n - 1 and ratings[i] > ratings[i + 1] and candies[i + 1] + 1 > candies[i]:
+                candies[i] = candies[i + 1] + 1
 
         return sum(candies)
 
