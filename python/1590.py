@@ -25,10 +25,10 @@ class Solution:
 
 
 def test():
-    # assert Solution().minSubarray(nums=[10, 15, 4, 2, 5, 55], p=7) == 0
-    # assert Solution().minSubarray(nums=[6, 3, 5, 2], p=9) == 2
-    # assert Solution().minSubarray(nums=[3, 1, 4, 2], p=6) == 1
-    # assert Solution().minSubarray(nums=[1, 2, 3], p=3) == 0
+    assert Solution().minSubarray(nums=[10, 15, 4, 2, 5, 55], p=7) == 0
+    assert Solution().minSubarray(nums=[6, 3, 5, 2], p=9) == 2
+    assert Solution().minSubarray(nums=[3, 1, 4, 2], p=6) == 1
+    assert Solution().minSubarray(nums=[1, 2, 3], p=3) == 0
     assert Solution().minSubarray(nums=[1, 12, 5, 11, 17, 34, 4], p=17) == 2
 
 
