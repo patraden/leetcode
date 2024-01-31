@@ -29,10 +29,9 @@ class Solution:
 
 
 def test():
-    # print(Solution().countAnagrams("abbbss"))
-    # print(Solution().countAnagrams("aa"))
+    print(Solution().countAnagrams("abbbss"))
+    print(Solution().countAnagrams("aa"))
     print(Solution().countAnagrams(s="too hot"))
-    print(math.comb(20000, 20000-1))
 
 
 if __name__ == '__main__':
