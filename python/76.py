@@ -9,36 +9,34 @@ class Solution:
         for c in t:
             tu[c] = tu.get(c, 0) + 1
 
-        l, r = m, n + 1
+        l, r = 0, 0
+        su = {}
+        #  move right index first
+        while not self.includes(su, tu):
+            if r == n:
+                return res
+            su[s[r]] = su.get(s[r], 0) + 1
+            r += 1
 
-        while l < r:
-            m = (l + r) // 2
+        res = s[:r]
 
-            flag = False
-            prefix = {}
-
-            for i in range(m):
-                prefix[s[i]] = prefix.get(s[i], 0) + 1
-
-            if self.includes(prefix, tu):
-                r = m
-                res = s[:m]
-                continue
-
-            for i in range(m, n):
-                prefix[s[i]] = prefix.get(s[i], 0) + 1
-                prefix[s[i - m]] -= 1
-                if prefix[s[i - m]] == 0:
-                    del prefix[s[i - m]]
-                if self.includes(prefix, tu):
-                    flag = True
-                    res = s[i + 1 - m:i + 1]
+        while l < r < n + 1:
+            #  push left index to the right as much as possible
+            while l < r:
+                su[s[l]] -= 1
+                if su[s[l]] == 0:
+                    del su[s[l]]
+                if not self.includes(su, tu):
+                    # revert changes
+                    su[s[l]] = su.get(s[l], 0) + 1
                     break
-
-            if flag:
-                r = m
-            else:
-                l = m + 1
+                l += 1
+                if len(res) > (r - l):
+                    res = s[l:r]
+            # move right index to 1 position
+            if r < n:
+                su[s[r]] = su.get(s[r], 0) + 1
+            r += 1
         return res
 
     def includes(self, this: dict, other: dict) -> bool:
@@ -54,7 +52,7 @@ def test():
     assert s.minWindow(s="a", t="aa") == ""
     assert s.minWindow(s="ADOBECODEBANC", t="ABC") == "BANC"
     assert s.minWindow(s="a", t="a") == "a"
-    assert s.minWindow(s="ADOBECODEBANC", t="ABB") == "BECODEBA"
+    assert s.minWindow(s="ADOBECODEBANC", t="DBC") == "DOBEC"
 
 
 if __name__ == "__main__":
