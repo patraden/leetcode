@@ -6,12 +6,13 @@ class Solution:
         def diff_one(s, k):
             return sum(map(lambda t: t[0] != t[1], zip(s, k))) == 1
 
+        all_paths = []
         visited = {beginWord}
         layer = {beginWord}
         previous = {beginWord: None}
 
         if endWord not in wordList:
-            return []
+            return all_paths
 
         while layer and endWord not in layer:
             new_layer = set()
@@ -26,9 +27,8 @@ class Solution:
             layer = new_layer
 
         if endWord not in layer:
-            return []
+            return all_paths
 
-        all_paths = []
         path = [endWord]
 
         def backtrack(previous_nodes):
@@ -44,7 +44,6 @@ class Solution:
                 path.pop()
 
         backtrack(previous[endWord])
-
         return all_paths
 
 
