@@ -22,8 +22,8 @@ class Solution:
 
 
 def test():
-    # print(Solution().minDistance(word1="intention", word2="execution"))
-    # print(Solution().minDistance(word1="horse", word2="ros"))
+    print(Solution().minDistance(word1="intention", word2="execution"))
+    print(Solution().minDistance(word1="horse", word2="ros"))
     print(Solution().minDistance(word1="", word2="ate"))
 
 
