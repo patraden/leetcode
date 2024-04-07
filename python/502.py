@@ -6,23 +6,23 @@ class Solution:
     def findMaximizedCapital(self, k: int, w: int, profits: List[int], capital: List[int]) -> int:
 
         h = []
-        r = range(len(capital))
-        m = 0
+        capital = sorted(enumerate(capital), key=lambda x: x[1])
+        m = j = 0
 
+        i, val = capital[j]
         while m < k:
-            rn = []
-            for i in r:
-                if capital[i] <= w:
-                    heapq.heappush(h, -profits[i])
-                else:
-                    rn.append(i)
+            while j < len(capital) and val <= w:
+                heapq.heappush(h, -profits[i])
+                j += 1
+                if j < len(capital):
+                    i, val = capital[j]
 
             if not h:
                 return w
 
             w -= heapq.heappop(h)
             m += 1
-            r = rn
+
         return w
 
 
