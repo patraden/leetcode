@@ -5,6 +5,7 @@ class Node:
     def __init__(self):
         self.symbols = {}
         self.terminal = False
+        self.w = None
 
 
 class Solution:
@@ -36,27 +37,28 @@ class Solution:
             for letter in word:
                 node = node.symbols.setdefault(letter, Node())
             node.terminal = True
+            node.w = word
 
         res = set()
 
-        def backtrack(i, j, w, prefix):
+        def backtrack(i, j, w):
             nonlocal res
 
             w = w.symbols[board[i][j]]
             if w.terminal:
-                res.add(prefix + board[i][j])
+                res.add(w.w)
 
             for k, m in ((i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)):
                 if 0 <= k < len(board) and 0 <= m < len(board[0]) and board[k][m] in w.symbols:
                     temp = board[i][j]
                     board[i][j] = ''
-                    backtrack(k, m, w, prefix + temp)
+                    backtrack(k, m, w)
                     board[i][j] = temp
 
         for r in range(len(board)):
             for c in range(len(board[0])):
                 if board[r][c] in root.symbols:
-                    backtrack(r, c, root, "")
+                    backtrack(r, c, root)
 
         return list(res)
 
