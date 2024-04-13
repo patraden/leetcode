@@ -10,13 +10,9 @@ class Solution:
         stacks = [[] for _ in range(m)]
 
         for i in range(n + 1):
-            prefix = 0
             for j in range(m):
-                if matrix[i][j] == "0":
-                    prefix = 0
-                else:
-                    prefix += 1
-                matrix[i][j] = prefix
+                val = 0 if matrix[i][j] == "0" else 1
+                matrix[i][j] = val if j == 0 else matrix[i][j - 1] * val + val
 
                 stack = stacks[j]
                 while stack and matrix[stack[-1][0]][j] >= matrix[i][j]:
