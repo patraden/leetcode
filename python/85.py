@@ -18,7 +18,7 @@ class Solution:
                 while stack and matrix[stack[-1][0]][j] >= matrix[i][j]:
                     (idx, li) = stack.pop()
                     res = max((i - li - 1) * matrix[idx][j], res)
-                li = -1 if not stack else stack[-1][0]
+                li = stack[-1][0] if stack else -1
                 stack.append((i, li))
         return res
 
