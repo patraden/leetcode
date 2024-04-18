@@ -8,9 +8,11 @@ class Solution:
         for i in range(n):
             for j in range(m):
                 if grid[i][j] == 1:
-                    for r, c in ((i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)):
-                        if r >= n or r < 0 or c >= m or c < 0 or grid[r][c] == 0:
-                            res += 1
+                    res += 4
+                    if i > 0 and grid[i - 1][j] == 1:
+                        res -= 2
+                    if j > 0 and grid[i][j - 1] == 1:
+                        res -= 2
         return res
 
 
