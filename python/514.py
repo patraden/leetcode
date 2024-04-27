@@ -16,7 +16,6 @@ class Solution:
         return min(dp[key[-1]].values())
 
 
-
 def test():
     # Solution().findRotateSteps(ring="godding", key="gd")
     print(Solution().findRotateSteps(ring="godding", key="godding"))
