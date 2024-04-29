@@ -6,18 +6,8 @@ class Solution:
         s = 0
         for num in nums:
             s ^= num
-
-        if s == k:
-            return 0
-
-        res = 0
-        while s > 0 or k > 0:
-            if (s & 1) != (k & 1):
-                res += 1
-            s >>= 1
-            k >>= 1
-
-        return res
+        s ^= k
+        return bin(s).count('1')
 
 
 def test():
