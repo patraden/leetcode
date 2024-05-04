@@ -9,37 +9,28 @@ class ListNode:
 
 
 class Solution:
-    def reverse(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if not head:
-            return head
-
-        node = head
-        prev = None
-        while node:
-            nxt = node.next
-            node.next = prev
-            prev = node
-            if not nxt:
-                return node
-            node = nxt
-
-
     def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
-        if not head:
+        stack = []
+
+        node = head
+        m = 0
+        while node and m < k:
+            stack.append(node)
+            node = node.next
+            m += 1
+
+        if len(stack) < k:
             return head
 
-        count = 0
-        prev = None
-        node = head
-        while node and count < k:
-            nxt = node.next
-            node.next = prev
+        root = prev = stack.pop()
+        nxt = prev.next
+        while stack:
+            node = stack.pop()
+            prev.next = node
             prev = node
-            count += 1
-            node = nxt
 
-
-
+        prev.next = self.reverseKGroup(nxt, k)
+        return root
 
 
 def generate_list(head: list):
@@ -62,11 +53,11 @@ def walk_list(root):
 
 
 def test():
-    root = generate_list(head=[1, 22, 3, 4, 5])
+    head = [5]
+    root = generate_list(head=head)
     walk_list(root)
-    # walk_list(root)
     print("=" * 10)
-    new_root = Solution().reverse(root)
+    new_root = Solution().reverseKGroup(root, k=1)
     walk_list(new_root)
 
 
