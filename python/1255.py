@@ -1,51 +1,48 @@
+from collections import defaultdict
 from typing import List
+from string import ascii_lowercase
 
 
 class Solution:
     def maxScoreWords(self, words: List[str], letters: List[str], score: List[int]) -> int:
-        W = len(words)
-        # Count how many times each letter occurs
-        self.max_score = 0
-        freq = [0 for i in range(26)]
-        subset_letters = [0 for i in range(26)]
+        scores = dict(zip(ascii_lowercase, score))
+        h = defaultdict(int)
         for c in letters:
-            freq[ord(c) - 97] += 1
+            h[c] += 1
 
-        # Check if adding this word exceeds the frequency of any letter
-        def is_valid_word(subset_letters):
-            for c in range(26):
-                if freq[c] < subset_letters[c]:
-                    return False
-            else:
-                return True
+        def contains(w, store):
+            acc = defaultdict(int)
+            sc = 0
+            for c in w:
+                acc[c] += 1
+                sc += scores[c]
+                if c not in store or store[c] - acc[c] < 0:
+                    return None, None
+            return acc, sc
 
-        def check(w, words, score, subset_letters, total_score):
-            if w == -1:
-                # If all words have been iterated, check the score of this subset
-                self.max_score = max(self.max_score, total_score)
-                return
-            # Not adding words[w] to the current subset
-            check(w - 1, words, score, subset_letters, total_score)
-            # Adding words[w] to the current subset
-            L = len(words[w])
-            for i in range(L):
-                c = ord(words[w][i]) - 97
-                subset_letters[c] += 1
-                total_score += score[c]
+        valid_words = []
+        for word in words:
+            _acc, _ = contains(word, h)
+            if _acc:
+                valid_words.append(word)
 
-            if is_valid_word(subset_letters):
-                # Consider the next word if this subset is still valid
-                check(w - 1, words, score, subset_letters, total_score)
+        res = 0
 
-            # Rollback effects of this word
-            for i in range(L):
-                c = ord(words[w][i]) - 97
-                subset_letters[c] -= 1
-                total_score -= score[c]
+        def helper(i, d, s=0):
+            nonlocal res
+            for j in range(i, len(valid_words)):
+                w = valid_words[j]
+                acc, sc = contains(w, d)
+                if acc:
+                    res = max(res, s + sc)
+                    for k in acc:
+                        d[k] -= acc[k]
+                    helper(j + 1, d, s + sc)
+                    for k in acc:
+                        d[k] += acc[k]
 
-        check(W - 1, words, score, subset_letters, 0)
-        # Return max_score as the result
-        return self.max_score
+        helper(0, h.copy())
+        return res
 
 
 def test():
@@ -58,6 +55,11 @@ def test():
         words=["xxxz", "ax", "bx", "cx"],
         letters=["z", "a", "b", "c", "x", "x", "x"],
         score=[4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 10]
+    ))
+    print(Solution().maxScoreWords(
+        words=["baa", "bba", "ccb", "ac"],
+        letters=["a", "b", "b", "b", "b", "c"],
+        score=[2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ))
 
 
