@@ -1,4 +1,6 @@
 class Solution:
+    memo = {}
+
     def checkRecord(self, n: int) -> int:
         """
         0 - no 'A', last 'P'
@@ -9,10 +11,14 @@ class Solution:
         5 - 'A', last 'L'
         6 - 'A', last 'LL'
         """
+        if n in self.memo:
+            return self.memo[n]
+
         mod = 10 ** 9 + 7
         acc = [1, 1, 0, 1, 0, 0, 0]
         i = 1
         while i < n:
+            self.memo[i] = sum(acc) % mod
             acc_new = [0] * 7
             acc_new[0] = sum(acc[:3]) % mod
             acc_new[1] = acc[0]
@@ -24,7 +30,8 @@ class Solution:
             acc = acc_new
             i += 1
 
-        return sum(acc) % mod
+        self.memo[n] = sum(acc) % mod
+        return self.memo[n]
 
 
 def test():
