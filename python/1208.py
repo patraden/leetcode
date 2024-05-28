@@ -1,6 +1,3 @@
-from typing import List
-
-
 class Solution:
     def equalSubstring(self, s: str, t: str, maxCost: int) -> int:
         start = cost = res = 0
@@ -14,9 +11,9 @@ class Solution:
 
 
 def test():
-    # Solution().equalSubstring(s="abcd", t="bcdf", maxCost=3)
-    # Solution().equalSubstring(s="abcd", t="cdef", maxCost=3)
-    Solution().equalSubstring(s="cbcd", t="acce", maxCost=0)
+    print(Solution().equalSubstring(s="abcd", t="bcdf", maxCost=3))
+    print(Solution().equalSubstring(s="abcd", t="cdef", maxCost=3))
+    print(Solution().equalSubstring(s="cbcd", t="acce", maxCost=0))
 
 
 if __name__ == '__main__':
