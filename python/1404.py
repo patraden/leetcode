@@ -1,15 +1,18 @@
 class Solution:
     def numSteps(self, s: str) -> int:
-        res = 0
-        num = int(s, 2)
-        while num > 1:
-            if num % 2 == 0:
-                num >>= 1
-                res += 1
+        n = len(s)
+
+        operations = 0
+        carry = 0
+        for i in range(n - 1, 0, -1):
+            digit = int(s[i]) + carry
+            if digit % 2 == 1:
+                operations += 2
+                carry = 1
             else:
-                num += 1
-                res += 1
-        return res
+                operations += 1
+
+        return operations + carry
 
 
 def test():
