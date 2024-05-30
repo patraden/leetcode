@@ -7,12 +7,9 @@ class Solution:
         res = prefix = 0
         for j, num in enumerate(arr):
             prefix ^= num
-            if prefix not in d:
-                d[prefix] = [j]
-            else:
-                for i in d[prefix]:
-                    res += j - i - 1
-                d[prefix].append(j)
+            for i in d.setdefault(prefix, []):
+                res += j - i - 1
+            d[prefix].append(j)
         return res
 
 
