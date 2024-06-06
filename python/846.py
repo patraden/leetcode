@@ -18,9 +18,8 @@ class Solution:
         return True
 
 
-
 def test():
-    # print(Solution().isNStraightHand(hand=[1, 2, 3, 6, 2, 3, 4, 7, 8], groupSize=3))
+    print(Solution().isNStraightHand(hand=[1, 2, 3, 6, 2, 3, 4, 7, 8], groupSize=3))
     print(Solution().isNStraightHand(hand=[1, 2, 1, 1, 2, 3, 2, 3, 3], groupSize=3))
 
 
