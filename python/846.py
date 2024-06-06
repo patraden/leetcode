@@ -15,7 +15,7 @@ class Solution:
 
             while counter[start]:
                 for i in range(groupSize):
-                    if counter[start + i] == 0:
+                    if not counter[start + i]:
                         return False
                     counter[start + i] -= 1
         return True
