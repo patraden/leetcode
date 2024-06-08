@@ -3,19 +3,15 @@ from typing import List
 
 class Solution:
     def checkSubarraySum(self, nums: List[int], k: int) -> bool:
-        if len(nums) < 2:
-            return False
-        pprefix = 0
-        prefix = (nums[0] + nums[1]) % k
-        if prefix == 0:
-            return True
-        d = {pprefix}
-        for i in range(2, len(nums)):
-            prefix = (prefix + nums[i]) % k
-            pprefix = (pprefix + nums[i - 2]) % k
-            d.add(pprefix)
-            if prefix in d:
+        p = 0
+        h = {p: -1}
+        for i in range(len(nums)):
+            num = nums[i]
+            p += num
+            p %= k
+            if p in h and (i - h[p]) >= 2:
                 return True
+            h.setdefault(p, i)
         return False
 
 
