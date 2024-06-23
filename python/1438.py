@@ -18,7 +18,7 @@ class Solution:
                 maxq.pop()
             maxq.append(i)
 
-            # trying to shift right pointer
+            # shifting left pointer if needed
             while l < i and nums[maxq[0]] - nums[minq[0]] > limit:
                 l += 1
                 if minq[0] < l:
