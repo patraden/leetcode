@@ -30,6 +30,21 @@ class Solution:
                 break
         return root
 
+    def bstToGstRec(self, root: TreeNode) -> TreeNode:
+        prefix = 0
+
+        def helper(node):
+            nonlocal prefix
+            if not node:
+                return
+            helper(node.right)
+            prefix += node.val
+            node.val = prefix
+            helper(node.left)
+
+        helper(root)
+        return root
+
 
 def test():
     pass
