@@ -7,7 +7,7 @@ class WordDictionary:
         node = self.node
         for c in word:
             node = node.setdefault(c, {})
-        node["#"] = None
+        node["#"] = {}
 
     def search(self, word: str) -> bool:
         stack = [(self.node, 0)]
@@ -18,7 +18,7 @@ class WordDictionary:
                 return True
             else:
                 for c in node:
-                    if c != '#' and (char == '.' or c == char):
+                    if char == '.' or c == char:
                         stack.append((node[c], idx + 1))
         return False
 
