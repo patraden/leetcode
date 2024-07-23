@@ -1,32 +1,25 @@
-class Node:
-    def __init__(self):
-        self.alphabet = {}
-        self.terminal = False
-
-
 class WordDictionary:
 
     def __init__(self):
-        self.node = Node()
+        self.node = {}
 
     def addWord(self, word: str) -> None:
         node = self.node
         for c in word:
-            node = node.alphabet.setdefault(c, Node())
-        node.terminal = True
+            node = node.setdefault(c, {})
+        node["#"] = None
 
     def search(self, word: str) -> bool:
         stack = [(self.node, 0)]
         while stack:
-            s, idx = stack.pop()
+            node, idx = stack.pop()
             char = word[idx] if idx < len(word) else None
-            if char is None:
-                if s.terminal:
-                    return True
+            if char is None and "#" in node:
+                return True
             else:
-                for c in s.alphabet:
-                    if char == '.' or c == char:
-                        stack.append((s.alphabet[c], idx + 1))
+                for c in node:
+                    if c != '#' and (char == '.' or c == char):
+                        stack.append((node[c], idx + 1))
         return False
 
 
