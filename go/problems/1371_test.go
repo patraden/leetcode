@@ -1,9 +1,6 @@
-package problems_test
+package problems
 
-import (
-	"leetcode/problems"
-	"testing"
-)
+import "testing"
 
 func TestFindTheLongestSubstring(t *testing.T) {
 	tests := []struct {
@@ -35,7 +32,7 @@ func TestFindTheLongestSubstring(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := problems.FindTheLongestSubstring(tt.s); got != tt.want {
+			if got := FindTheLongestSubstring(tt.s); got != tt.want {
 				t.Errorf("got = %v, want %v", got, tt.want)
 			}
 		})

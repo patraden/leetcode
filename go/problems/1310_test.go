@@ -1,9 +1,6 @@
-package problems_test
+package problems
 
-import (
-	"leetcode/problems"
-	"testing"
-)
+import "testing"
 
 func TestXorQueries(t *testing.T) {
 	tests := []struct {
@@ -34,7 +31,7 @@ func TestXorQueries(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := problems.XorQueries(tt.arr, tt.queries)
+			got := XorQueries(tt.arr, tt.queries)
 			if len(got) != len(tt.want) {
 				t.Errorf("length diff got = %v, want %v", len(got), len(tt.want))
 			}

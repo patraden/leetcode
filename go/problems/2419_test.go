@@ -1,9 +1,6 @@
-package problems_test
+package problems
 
-import (
-	"leetcode/problems"
-	"testing"
-)
+import "testing"
 
 func TestLongestSubarray(t *testing.T) {
 	tests := []struct {
@@ -30,7 +27,7 @@ func TestLongestSubarray(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := problems.LongestSubarray(tt.nums); got != tt.want {
+			if got := LongestSubarray(tt.nums); got != tt.want {
 				t.Errorf("got = %v, want %v", got, tt.want)
 			}
 		})
