@@ -7,7 +7,9 @@ import (
 )
 
 func TestQueue(t *testing.T) {
+
 	q := NewQueue(3)
+
 	if q.maxN != 3 {
 		t.Errorf("max size is not set")
 	}
@@ -18,8 +20,8 @@ func TestQueue(t *testing.T) {
 
 	q.Push(1)
 	q.Push(2)
-	assert.Equal(t, q.Push(3), nil, "Unexpected capacity error")
-	assert.Error(t, q.Push(4), "Unexpected capacity error")
+	assert.Equal(t, q.Push(3), nil, "unexpected error")
+	assert.Error(t, q.Push(4), "expected error")
 	assert.Equal(t, q.Pop(), 1)
 	assert.Equal(t, q.Pop(), 2)
 
