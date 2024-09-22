@@ -1,8 +1,6 @@
 package problems
 
-import (
-	"math"
-)
+import "math"
 
 func treeCounter(n int) func(int) int {
 	maxDepth := int(math.Log10(float64(n))) + 1
@@ -17,8 +15,7 @@ func treeCounter(n int) func(int) int {
 	return func(prefix int) int {
 		depth := int(math.Log10(float64(prefix))) + 1
 		pow := int(math.Pow(float64(10), float64((maxDepth - depth))))
-		lo := prefix * pow
-		hi := (prefix+1)*pow - 1
+		lo, hi := prefix*pow, (prefix+1)*pow-1
 		res := defaultTreeSize[maxDepth-depth+1]
 		if n < lo {
 			res -= hi - lo + 1
@@ -38,14 +35,12 @@ func findKthNumber440(n int, k int) int {
 	prefix := 0
 
 	for {
-		d := 0
+		sd := 0
 		if prefix == 0 {
-			d = 1
+			sd = 1
 		}
-		for d <= 9 {
-			if k-counter(prefix+d) > 0 {
-				k -= counter(prefix + d)
-			} else {
+		for d := sd; d <= 9; d++ {
+			if k-counter(prefix+d) <= 0 {
 				k -= 1
 				if k == 0 {
 					return prefix + d
@@ -54,7 +49,7 @@ func findKthNumber440(n int, k int) int {
 				prefix *= 10
 				break
 			}
-			d += 1
+			k -= counter(prefix + d)
 		}
 	}
 
