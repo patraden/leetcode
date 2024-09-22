@@ -1,5 +1,7 @@
 package problems
 
+import "math"
+
 func helper(root *TreeNode, min int, max int) bool {
 	if root == nil {
 		return true
@@ -11,5 +13,5 @@ func helper(root *TreeNode, min int, max int) bool {
 }
 
 func isValidBST(root *TreeNode) bool {
-	return helper(root, -2147483649, 2147483648)
+	return helper(root, math.MinInt, math.MaxInt)
 }
