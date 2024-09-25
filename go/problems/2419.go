@@ -1,12 +1,5 @@
 package problems
 
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-
 func LongestSubarray(nums []int) int {
 	res := 0
 	mx := 0
