@@ -1,12 +1,5 @@
 package problems
 
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
-}
-
 func MaxArea(height []int) int {
 	l, r := 0, len(height)-1
 	res, cur := 0, 0
