@@ -1,18 +1,10 @@
 package problems
 
-import (
-	"leetcode/datastructures/binarytree"
-	"leetcode/datastructures/trie"
-)
-
-type TreeNode = binarytree.TreeNode
-type TrieNode = trie.TrieNode
-
-func abs(a int, b int) int {
-	if a < b {
-		return b - a
+func abs(a int) int {
+	if a < 0 {
+		return -a
 	}
-	return a - b
+	return a
 }
 
 func min(a, b int) int {

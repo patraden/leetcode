@@ -1,16 +1,19 @@
 package problems
 
-import "testing"
+import (
+	"leetcode/datastructures/binarytree"
+	"testing"
+)
 
 func TestValidBST(t *testing.T) {
 	tests := []struct {
 		name string
-		root *TreeNode
+		root *binarytree.TreeNode
 		want bool
 	}{
 		{
 			name: "test 0",
-			root: &TreeNode{
+			root: &binarytree.TreeNode{
 				Val:   2,
 				Left:  nil,
 				Right: nil,
@@ -19,14 +22,14 @@ func TestValidBST(t *testing.T) {
 		},
 		{
 			name: "test 1",
-			root: &TreeNode{
+			root: &binarytree.TreeNode{
 				Val: 2,
-				Left: &TreeNode{
+				Left: &binarytree.TreeNode{
 					Val:   1,
 					Left:  nil,
 					Right: nil,
 				},
-				Right: &TreeNode{
+				Right: &binarytree.TreeNode{
 					Val:   3,
 					Left:  nil,
 					Right: nil,
@@ -36,21 +39,21 @@ func TestValidBST(t *testing.T) {
 		},
 		{
 			name: "test 2",
-			root: &TreeNode{
+			root: &binarytree.TreeNode{
 				Val: 5,
-				Left: &TreeNode{
+				Left: &binarytree.TreeNode{
 					Val:   1,
 					Left:  nil,
 					Right: nil,
 				},
-				Right: &TreeNode{
+				Right: &binarytree.TreeNode{
 					Val: 4,
-					Left: &TreeNode{
+					Left: &binarytree.TreeNode{
 						Val:   3,
 						Left:  nil,
 						Right: nil,
 					},
-					Right: &TreeNode{
+					Right: &binarytree.TreeNode{
 						Val:   6,
 						Left:  nil,
 						Right: nil,
@@ -61,21 +64,21 @@ func TestValidBST(t *testing.T) {
 		},
 		{
 			name: "test 3",
-			root: &TreeNode{
+			root: &binarytree.TreeNode{
 				Val: 5,
-				Left: &TreeNode{
+				Left: &binarytree.TreeNode{
 					Val:   4,
 					Left:  nil,
 					Right: nil,
 				},
-				Right: &TreeNode{
+				Right: &binarytree.TreeNode{
 					Val: 6,
-					Left: &TreeNode{
+					Left: &binarytree.TreeNode{
 						Val:   3,
 						Left:  nil,
 						Right: nil,
 					},
-					Right: &TreeNode{
+					Right: &binarytree.TreeNode{
 						Val:   7,
 						Left:  nil,
 						Right: nil,

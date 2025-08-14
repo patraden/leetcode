@@ -1,8 +1,11 @@
 package problems
 
-import "math"
+import (
+	"leetcode/datastructures/binarytree"
+	"math"
+)
 
-func helper(root *TreeNode, min int, max int) bool {
+func helper(root *binarytree.TreeNode, min int, max int) bool {
 	if root == nil {
 		return true
 	}
@@ -12,6 +15,6 @@ func helper(root *TreeNode, min int, max int) bool {
 	return helper(root.Left, min, root.Val) && helper(root.Right, root.Val, max)
 }
 
-func isValidBST(root *TreeNode) bool {
+func isValidBST(root *binarytree.TreeNode) bool {
 	return helper(root, math.MinInt, math.MaxInt)
 }

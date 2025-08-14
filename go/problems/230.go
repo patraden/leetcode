@@ -1,8 +1,10 @@
 package problems
 
-func kthSmallest(root *TreeNode, k int) int {
+import "leetcode/datastructures/binarytree"
 
-	stack := []*TreeNode{}
+func kthSmallest(root *binarytree.TreeNode, k int) int {
+
+	stack := []*binarytree.TreeNode{}
 	res := root.Val
 	current := root
 	count := 0

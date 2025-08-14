@@ -1,31 +1,34 @@
 package problems
 
-import "testing"
+import (
+	"leetcode/datastructures/binarytree"
+	"testing"
+)
 
 func TestGetMinimumDifference530(t *testing.T) {
 	tests := []struct {
 		name string
-		root *TreeNode
+		root *binarytree.TreeNode
 		want int
 	}{
 		{
 			name: "test 1",
-			root: &TreeNode{
+			root: &binarytree.TreeNode{
 				Val: 4,
-				Left: &TreeNode{
+				Left: &binarytree.TreeNode{
 					Val: 2,
-					Left: &TreeNode{
+					Left: &binarytree.TreeNode{
 						Val:   1,
 						Left:  nil,
 						Right: nil,
 					},
-					Right: &TreeNode{
+					Right: &binarytree.TreeNode{
 						Val:   3,
 						Left:  nil,
 						Right: nil,
 					},
 				},
-				Right: &TreeNode{
+				Right: &binarytree.TreeNode{
 					Val:   6,
 					Left:  nil,
 					Right: nil,
@@ -35,21 +38,21 @@ func TestGetMinimumDifference530(t *testing.T) {
 		},
 		{
 			name: "test 2",
-			root: &TreeNode{
+			root: &binarytree.TreeNode{
 				Val: 1,
-				Left: &TreeNode{
+				Left: &binarytree.TreeNode{
 					Val:   0,
 					Left:  nil,
 					Right: nil,
 				},
-				Right: &TreeNode{
+				Right: &binarytree.TreeNode{
 					Val: 48,
-					Left: &TreeNode{
+					Left: &binarytree.TreeNode{
 						Val:   12,
 						Left:  nil,
 						Right: nil,
 					},
-					Right: &TreeNode{
+					Right: &binarytree.TreeNode{
 						Val:   49,
 						Left:  nil,
 						Right: nil,
