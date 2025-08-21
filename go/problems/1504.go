@@ -17,6 +17,7 @@ func numSubmat(mat [][]int) int {
 
 	for _, row := range mat {
 		dp := zdp
+
 		stack := []int{}
 		for i, num := range row {
 			// get prev <= num
@@ -24,18 +25,16 @@ func numSubmat(mat [][]int) int {
 				stack = stack[:len(stack)-1]
 			}
 
-			val := 0
-			prev, j := 0, -1
+			v, j := 0, -1
 			if len(stack) > 0 {
 				j = stack[len(stack)-1]
-				prev = dp[j]
+				v += dp[j]
 			}
 
-			val += prev
-			val += (i - j) * num
-			dp[i] = val
+			v += (i - j) * num
+			dp[i] = v
 
-			res += val
+			res += v
 
 			stack = append(stack, i)
 		}
