@@ -1,8 +1,9 @@
 package problems
 
 import (
-	"fmt"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNumSubmat1504(t *testing.T) {
@@ -14,7 +15,7 @@ func TestNumSubmat1504(t *testing.T) {
 		{1, 1, 0},
 	})
 
-	fmt.Println(val)
+	assert.Equal(t, 13, val)
 
 	val = numSubmat([][]int{
 		{0, 1, 1, 0},
@@ -22,6 +23,6 @@ func TestNumSubmat1504(t *testing.T) {
 		{1, 1, 1, 0},
 	})
 
-	fmt.Println(val)
+	assert.Equal(t, 24, val)
 
 }
