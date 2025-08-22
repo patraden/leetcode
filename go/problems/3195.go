@@ -15,15 +15,13 @@ func minimumArea(grid [][]int) int {
 				mxi = i
 				mnj = j
 				mxj = j
-			} else {
-				mxi = i
-				if j > mxj {
-					mxj = j
-				}
-				if j < mnj {
-					mnj = j
-				}
+			} else if j > mxj {
+				mxj = j
+			} else if j < mnj {
+				mnj = j
 			}
+
+			mxi = i
 		}
 	}
 
