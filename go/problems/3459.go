@@ -20,9 +20,10 @@ func walkDiag(i, j int, dir [2]int, grid, memo [][]int) int {
 		}
 
 		// suffix
-		if grid[i][j] != 1 && grid[i][j]+prev == 2 {
+		switch {
+		case grid[i][j] != 1 && grid[i][j]+prev == 2:
 			sfx++
-		} else {
+		default:
 			sfx = 0
 		}
 
@@ -53,8 +54,8 @@ func lenOfVDiagonal(grid [][]int) int {
 
 	res := 0
 	for d, dir := range dirs {
-		switch d {
-		case 0, 4: // ↗
+		switch d % 4 {
+		case 0: // ↗
 			for j := m - 1; j > 0; j-- { // bot(r->l)
 				res = max(res, walkDiag(n-1, j, dir, grid, memo))
 			}
