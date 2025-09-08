@@ -7,33 +7,32 @@ func getNoZeroIntegers(n int) []int {
 		return []int{n - 1, 1}
 	}
 
-	d := 1
+	p := 1
 	for n > 0 {
 		digit = n % 10
+		digit -= bit
 
 		if n < 10 {
 			// last digit
-			digit -= bit
 			if digit != 0 {
-				n1 += digit * d
+				n1 += digit * p
 			}
 			break
 		}
 
-		digit -= bit
 		if digit >= 2 {
 			// enough to split between 2
-			n1 += (digit - 1) * d
-			n2 += 1 * d
+			n1 += (digit - 1) * p
+			n2 += 1 * p
 			bit = 0
 		} else {
-			n1 += 8 * d
-			n2 += (2 + digit) * d
+			n1 += 8 * p
+			n2 += (2 + digit) * p
 			bit = 1
 		}
 
 		n /= 10
-		d *= 10
+		p *= 10
 	}
 
 	return []int{n1, n2}
