@@ -30,17 +30,15 @@ func minimumTeachings(n int, languages [][]int, friendships [][]int) int {
 		}
 	}
 
-	counter := make(map[int]int)
+	res := 0
+	counter := make([]int, n+1)
+
 	for _, i := range people {
-		for _, l := range languages[i-1] {
-			counter[l]++
+		for _, lan := range languages[i-1] {
+			counter[lan]++
+			res = max(res, counter[lan])
 		}
 	}
 
-	res := len(people)
-	for _, v := range counter {
-		res = min(res, len(people)-v)
-	}
-
-	return res
+	return len(people) - res
 }
