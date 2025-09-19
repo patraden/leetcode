@@ -85,36 +85,36 @@ func ConstructorTM(tasks [][]int) TaskManager {
 
 }
 
-func (this *TaskManager) Add(userId int, taskId int, priority int) {
-	if _, ok := this.tasks[taskId]; !ok {
+func (tm *TaskManager) Add(userId int, taskId int, priority int) {
+	if _, ok := tm.tasks[taskId]; !ok {
 		t := NewTask3408(taskId, userId, priority)
-		this.tasks[taskId] = t
-		heap.Push(this.pq, t)
+		tm.tasks[taskId] = t
+		heap.Push(tm.pq, t)
 	}
 }
 
-func (this *TaskManager) Edit(taskId int, newPriority int) {
-	if _, ok := this.tasks[taskId]; ok {
-		item := this.tasks[taskId]
+func (tm *TaskManager) Edit(taskId int, newPriority int) {
+	if _, ok := tm.tasks[taskId]; ok {
+		item := tm.tasks[taskId]
 		item.Set(newPriority)
-		heap.Fix(this.pq, item.index)
+		heap.Fix(tm.pq, item.index)
 	}
 }
 
-func (this *TaskManager) Rmv(taskId int) {
-	if _, ok := this.tasks[taskId]; ok {
-		item := this.tasks[taskId]
-		delete(this.tasks, taskId)
-		heap.Remove(this.pq, item.index)
+func (tm *TaskManager) Rmv(taskId int) {
+	if _, ok := tm.tasks[taskId]; ok {
+		item := tm.tasks[taskId]
+		delete(tm.tasks, taskId)
+		heap.Remove(tm.pq, item.index)
 	}
 
 }
 
-func (this *TaskManager) ExecTop() int {
-	if this.pq.Len() > 0 {
-		item := heap.Pop(this.pq)
+func (tm *TaskManager) ExecTop() int {
+	if tm.pq.Len() > 0 {
+		item := heap.Pop(tm.pq)
 		if task, ok := item.(*Task3408); ok {
-			delete(this.tasks, task.id)
+			delete(tm.tasks, task.id)
 			return task.userID
 		}
 

@@ -101,16 +101,16 @@ func Constructor(foods []string, cuisines []string, ratings []int) FoodRatings {
 	}
 }
 
-func (this *FoodRatings) ChangeRating(food string, newRating int) {
-	if item, exists := this.foods[food]; exists {
+func (fr *FoodRatings) ChangeRating(food string, newRating int) {
+	if item, exists := fr.foods[food]; exists {
 		item.Set(newRating)
-		cuisine := this.foodCousine[food]
-		heap.Fix(this.cuisinesQueues[cuisine], item.index)
+		cuisine := fr.foodCousine[food]
+		heap.Fix(fr.cuisinesQueues[cuisine], item.index)
 	}
 }
 
-func (this *FoodRatings) HighestRated(cuisine string) string {
-	pq := this.cuisinesQueues[cuisine]
+func (fr *FoodRatings) HighestRated(cuisine string) string {
+	pq := fr.cuisinesQueues[cuisine]
 	top := pq.Top()
 	if top == nil {
 		return ""
