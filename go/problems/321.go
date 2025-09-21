@@ -1,5 +1,7 @@
 package problems
 
+import "slices"
+
 func maxNumber321(nums1 []int, nums2 []int, k int) []int {
 	res := make([]int, k)
 	if len(nums1) > len(nums2) {
@@ -68,24 +70,12 @@ func maxNumber321(nums1 []int, nums2 []int, k int) []int {
 		return res
 	}
 
-	more := func(n1, n2 []int) bool {
-		for i := range len(n1) {
-			if n1[i] > n2[i] {
-				return true
-			}
-			if n1[i] < n2[i] {
-				return false
-			}
-		}
-		return false
-	}
-
 	for m := range min(len(nums1), k) + 1 {
 		if k-m <= len(nums2) {
 			n1 := maxNum(m, nums1)
 			n2 := maxNum(k-m, nums2)
 			num := merge(n1, n2)
-			if more(num, res) {
+			if slices.Compare(num, res) > 0 {
 				res = num
 			}
 		}
