@@ -1,24 +1,99 @@
 package problems
 
-import "fmt"
-
 func maxNumber321(nums1 []int, nums2 []int, k int) []int {
-	res := []int{}
-
-	max1 := make([]int, len(nums1))
-	// max2 := make([]int, len(nums2))
-	stack := []int{}
-
-	for i, num := range nums1 {
-		for len(stack) > 0 && nums1[stack[len(stack)-1]] < num {
-			j := stack[len(stack)-1]
-			stack = stack[:len(stack)-1]
-			max1[j] = i
-		}
-		stack = append(stack, i)
+	res := make([]int, k)
+	if len(nums1) > len(nums2) {
+		nums1, nums2 = nums2, nums1
 	}
 
-	fmt.Println(nums1, max1, stack)
+	maxNum := func(size int, nums []int) []int {
+		stack := []int{}
+		for i, digit := range nums {
+			for len(stack) > size-min(size, len(nums)-i) && digit > stack[len(stack)-1] {
+				stack = stack[:len(stack)-1]
+			}
+
+			if len(stack) < size {
+				stack = append(stack, digit)
+			}
+		}
+		return stack
+	}
+
+	merge := func(n1, n2 []int) []int {
+		if len(n1) == 0 {
+			return n2
+		}
+		if len(n2) == 0 {
+			return n1
+		}
+
+		res := make([]int, 0, len(n1)+len(n2))
+
+		p1, p2 := 0, 0
+		for p1 < len(n1) && p2 < len(n2) {
+			if n1[p1] > n2[p2] {
+				res = append(res, n1[p1])
+				p1++
+				continue
+			}
+
+			if n1[p1] < n2[p2] {
+				res = append(res, n2[p2])
+				p2++
+				continue
+			}
+
+			p12, p22 := p1, p2
+			for p12 < len(n1) && p22 < len(n2) && n1[p12] == n2[p22] {
+				p12++
+				p22++
+			}
+
+			if p12 == len(n1) {
+				res = append(res, n2[p2])
+				p2++
+			} else if p22 == len(n2) {
+				res = append(res, n1[p1])
+				p1++
+			} else if n1[p12] > n2[p22] {
+				res = append(res, n1[p1])
+				p1++
+			} else if n1[p12] < n2[p22] {
+				res = append(res, n2[p2])
+				p2++
+			}
+
+		}
+
+		res = append(res, n1[p1:]...)
+		res = append(res, n2[p2:]...)
+
+		return res
+	}
+
+	more := func(n1, n2 []int) bool {
+		for i := range len(n1) {
+			if n1[i] > n2[i] {
+				return true
+			}
+			if n1[i] < n2[i] {
+				return false
+			}
+		}
+		return false
+	}
+
+	for m := range min(len(nums1), k) + 1 {
+		if k-m <= len(nums2) {
+			n1 := maxNum(m, nums1)
+			n2 := maxNum(k-m, nums2)
+			num := merge(n1, n2)
+			if more(num, res) {
+				res = num
+			}
+		}
+	}
 
 	return res
 
