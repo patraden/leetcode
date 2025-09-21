@@ -44,24 +44,20 @@ func maxNumber321(nums1 []int, nums2 []int, k int) []int {
 				continue
 			}
 
-			p12, p22 := p1, p2
-			for p12 < len(n1) && p22 < len(n2) && n1[p12] == n2[p22] {
-				p12++
-				p22++
+			i, j := p1, p2
+			for i < len(n1) && j < len(n2) && n1[i] == n2[j] {
+				i++
+				j++
 			}
 
-			if p12 == len(n1) {
+			if i == len(n1) || (j < len(n2) && n1[i] < n2[j]) {
 				res = append(res, n2[p2])
 				p2++
-			} else if p22 == len(n2) {
+			}
+
+			if j == len(n2) || (i < len(n1) && n1[i] > n2[j]) {
 				res = append(res, n1[p1])
 				p1++
-			} else if n1[p12] > n2[p22] {
-				res = append(res, n1[p1])
-				p1++
-			} else if n1[p12] < n2[p22] {
-				res = append(res, n2[p2])
-				p2++
 			}
 
 		}
