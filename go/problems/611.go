@@ -1,38 +1,33 @@
 package problems
 
-import (
-	"sort"
-)
+import "slices"
 
 func triangleNumber611(nums []int) int {
-	if len(nums) < 3 {
-		return 0
-	}
+	slices.Sort(nums)
+	res := 0
+	n := len(nums)
+	for i := n - 1; i >= 2; i-- {
 
-	// find index of the left most num
-	// which is greater than or equal to target
-	leftMost := func(nums []int, start, target int) int {
-		l := start
-		r := len(nums)
-		for l < r {
-			m := (l + r) / 2
-			if nums[m] < target {
-				l = m + 1
-			} else {
-				r = m
-			}
+		// optimization
+		if nums[0]+nums[1] > nums[i] {
+			res += (i + 1) * i * (i - 1) / 6
+			break
 		}
 
-		return l
-	}
+		// optimization
+		if nums[i-2]+nums[i-1] <= nums[i] {
+			continue
+		}
 
-	sort.Ints(nums)
-
-	res := 0
-	for p1 := 0; p1 < len(nums)-2; p1++ {
-		for p2 := p1 + 1; p2 < len(nums)-1; p2++ {
-			idx := leftMost(nums, p2+1, nums[p1]+nums[p2])
-			res += idx - p2 - 1
+		l, r := 0, i-1
+		for l < r {
+			s := nums[l] + nums[r]
+			if s > nums[i] {
+				res += r - l
+				r--
+			} else {
+				l++
+			}
 		}
 	}
 
