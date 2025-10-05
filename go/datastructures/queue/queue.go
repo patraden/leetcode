@@ -28,7 +28,7 @@ func (q *Queue) IsEmpty() bool {
 	return q.size == 0
 }
 
-func (q *Queue) Push(x interface{}) error {
+func (q *Queue) Push(x any) error {
 
 	if q.size == q.maxN {
 		return fmt.Errorf("queue is out of capacity %v", q.maxN)
@@ -41,7 +41,7 @@ func (q *Queue) Push(x interface{}) error {
 
 }
 
-func (q *Queue) Pop() interface{} {
+func (q *Queue) Pop() any {
 	if q.IsEmpty() {
 		return nil
 	}
