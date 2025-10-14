@@ -21,11 +21,8 @@ func hasIncreasingSubarrays(nums []int, k int) bool {
 		if nums[r] <= nums[r-1] {
 			l, s = s, r
 		}
-		if r-s+1 == 2*k {
-			return true
-		}
 
-		if s-l >= k && r-s+1 >= k {
+		if (s-l >= k && r-s+1 >= k) || r-s+1 == 2*k {
 			return true
 		}
 	}
