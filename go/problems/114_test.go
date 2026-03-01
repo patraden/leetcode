@@ -19,6 +19,8 @@ func validateFlattenHelper(t *testing.T, root *TreeNode) {
 }
 
 func testTreeNode(t *testing.T) *TreeNode {
+	t.Helper()
+
 	node := &TreeNode{Val: 1}
 	node.Left = &TreeNode{Val: 2}
 	node.Right = &TreeNode{Val: 5}
