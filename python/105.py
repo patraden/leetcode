@@ -27,7 +27,7 @@ class Solution:
 
             root = TreeNode(preorder[idx])
             root.left = helper(idx + 1, start, m)
-            root.right = helper(idx + m - start + 1, m + 1, end)
+            root.right = helper(idx + m + 1 - start, m + 1, end)
 
             return root
 
