@@ -13,7 +13,7 @@ func TestFoodRatingsTest1(t *testing.T) {
 	cuisines := []string{"korean", "japanese", "japanese", "greek", "japanese", "korean"}
 	ratings := []int{9, 12, 8, 15, 14, 7}
 
-	fr := Constructor(foods, cuisines, ratings)
+	fr := Constructor2353(foods, cuisines, ratings)
 
 	assert.Equal(t, "kimchi", fr.HighestRated("korean"))
 	assert.Equal(t, "ramen", fr.HighestRated("japanese"))

@@ -75,7 +75,7 @@ type FoodRatings struct {
 	cuisinesQueues map[string]*PriorityQueue // all foods of cousine
 }
 
-func Constructor(foods []string, cuisines []string, ratings []int) FoodRatings {
+func Constructor2353(foods []string, cuisines []string, ratings []int) FoodRatings {
 	foodsMap := make(map[string]*Item)
 	foodCousine := make(map[string]string)
 	cuisinesQueues := make(map[string]*PriorityQueue)
