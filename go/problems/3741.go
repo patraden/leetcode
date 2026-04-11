@@ -6,23 +6,17 @@ func minimumDistance(nums []int) int {
 
 	for i, num := range nums {
 		m[num] = append(m[num], i)
-	}
-
-	for k := range m {
-		if len(m[k]) < 3 {
+		if len(m[num]) < 3 {
 			continue
 		}
 
-		i := 0
-		for i+2 < len(m[k]) {
-			if res == -1 {
-				res = (m[k][i+2] - m[k][i]) * 2
-				continue
+		n := len(m[num])
+		if res == -1 {
+			res = (m[num][n-1] - m[num][n-3]) * 2
+			continue
 
-			}
-			res = min(res, (m[k][i+2]-m[k][i])*2)
-			i++
 		}
+		res = min(res, (m[num][n-1]-m[num][n-3])*2)
 	}
 
 	return res
