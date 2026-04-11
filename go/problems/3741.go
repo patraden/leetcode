@@ -2,28 +2,27 @@ package problems
 
 func minimumDistance(nums []int) int {
 	res := -1
-	m := map[int][3]int{}
+	m := map[int][2]int{}
 
 	for i, num := range nums {
 		if _, ok := m[num]; !ok {
-			m[num] = [3]int{-1, -1, i}
+			m[num] = [2]int{-1, i}
 			continue
 		}
 
 		v := m[num]
-		v[0], v[1], v[2] = v[1], v[2], i
-		m[num] = v
-
 		if v[0] == -1 {
+			v[0], v[1] = v[1], i
+			m[num] = v
 			continue
 		}
 
-		if res == -1 {
-			res = (v[2] - v[0]) * 2
-			continue
-
+		d := (i - v[0]) * 2
+		if res == -1 || d < res {
+			res = d
 		}
-		res = min(res, (v[2]-v[0])*2)
+		v[0], v[1] = v[1], i
+		m[num] = v
 	}
 
 	return res
